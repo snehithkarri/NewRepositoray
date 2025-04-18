@@ -908,3 +908,202 @@
                     <input type="text" id="consultName" class="form-control" required>
                 </div>
                 <div class="form-group
+                <iframe data-w-type="embedded" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://sql8q.mjt.lu/wgt/sql8q/xy52/form?c=ab4a1607" width="100%" style="height: 0;"></iframe>
+
+<script type="text/javascript" src="https://app.mailjet.com/pas-nc-embedded-v1.js"></script>
+             <script>
+                function openModal(modalId) {
+                    document.getElementById(modalId).style.display = 'flex';
+                }
+                
+                function closeModal(modalId) {
+                    document.getElementById(modalId).style.display = 'none';
+                }
+                
+                
+                window.addEventListener('click', function(event) {
+                    const modals = document.getElementsByClassName('modal');
+                    for (let i = 0; i < modals.length; i++) {
+                        if (event.target === modals[i]) {
+                            modals[i].style.display = 'none';
+                        }
+                    }
+                });
+                
+                const consultationModalHTML = `
+                <div class="modal" id="consultationModal">
+                    <div class="modal-content">
+                        <span class="close-modal" onclick="closeModal('consultationModal')">&times;</span>
+                        <h2>Book a Consultation</h2>
+                        <form id="consultationForm">
+                            <div class="form-group">
+                                <label for="consultName">Full Name</label>
+                                <input type="text" id="consultName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="consultEmail">Email Address</label>
+                                <input type="email" id="consultEmail" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="consultDate">Preferred Date</label>
+                                <input type="date" id="consultDate" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="consultTime">Preferred Time</label>
+                                <input type="time" id="consultTime" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="consultMessage">Brief description of your concern</label>
+                                <textarea id="consultMessage" class="form-control" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Request Appointment</button>
+                        </form>
+                    </div>
+                </div>`;
+                
+              
+                const chatModalHTML = `
+                <div class="modal" id="chatModal">
+                    <div class="modal-content">
+                        <span class="close-modal" onclick="closeModal('chatModal')">&times;</span>
+                        <h2>Chat with Us</h2>
+                        <div class="chat-container">
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="chat-message bot">
+                                    <p>Hello! How can we help you today?</p>
+                                </div>
+                            </div>
+                            <form id="chatForm">
+                                <div class="chat-input">
+                                    <input type="text" id="userMessage" placeholder="Type your message..." class="form-control">
+                                    <button type="submit" class="submit-btn">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>`;
+                
+                
+                if (!document.getElementById('consultationModal')) {
+                    document.body.insertAdjacentHTML('beforeend', consultationModalHTML);
+                }
+                if (!document.getElementById('chatModal')) {
+                    document.body.insertAdjacentHTML('beforeend', chatModalHTML);
+                }</script>
+
+                // Replace placeholder with actual image
+function addDoctorImage() {
+    // Path to your image on the server
+    const doctorImagePath = 'images/doctor.jpg';
+    
+    // Update the consultation section image
+    const consultationImg = document.querySelector('.consultation-img');
+    if (consultationImg) {
+        consultationImg.innerHTML = `<img src="${doctorImagePath}" alt="Doctor consultation" style="width: 100%; height: 100%; object-fit: cover;">`;
+    }
+    
+    // Update doctor cards with real images if you have them
+    const doctorCards = document.querySelectorAll('.doctor-img');
+    const doctorImages = [
+        'images/dr-sarah.jpg',
+        'images/dr-michael.jpg',
+        'images/dr-olivia.jpg',
+        'images/dr-james.jpg'
+    ];
+    
+    doctorCards.forEach((card, index) => {
+        if (doctorImages[index]) {
+            card.innerHTML = `<img src="${doctorImages[index]}" alt="Doctor portrait" style="width: 100%; height: 100%; object-fit: cover;">`;
+        }
+    });
+}
+
+// Call the function when the page loads
+window.addEventListener('DOMContentLoaded', addDoctorImage);
+// Add this to your JavaScript
+document.getElementById('chatForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const userMessage = document.getElementById('userMessage').value;
+    if (!userMessage.trim()) return;
+    
+    // Display user message
+    const chatMessages = document.getElementById('chatMessages');
+    chatMessages.innerHTML += `
+        <div class="chat-message user">
+            <p>${userMessage}</p>
+        </div>
+    `;
+    
+    // Clear input
+    document.getElementById('userMessage').value = '';
+    
+    // Simulate response (in real implementation, this would connect to a server)
+    setTimeout(() => {
+        const botResponses = [
+            "Thank you for reaching out. When would you like to schedule an appointment?",
+            "I understand you're looking for help. Can you tell me more about your concerns?",
+            "One of our doctors will be available to help you. Would you like us to call you back?",
+            "We have appointments available this week. Would you like me to check specific times?"
+        ];
+        
+        const randomResponse = botResponses[Math.floor(Math.random() * botResponses.length)];
+        
+        chatMessages.innerHTML += `
+            <div class="chat-message bot">
+                <p>${randomResponse}</p>
+            </div>
+        `;
+        
+        // Auto-scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1000);
+    
+    // Auto-scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+<!-- Add to your existing <style> section -->
+<style>
+    /* Chat Styles */
+    .chat-container {
+        display: flex;
+        flex-direction: column;
+        height: 400px;
+    }
+    
+    .chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+    
+    .chat-message {
+        margin-bottom: 1rem;
+        padding: 0.8rem;
+        border-radius: 8px;
+        max-width: 80%;
+    }
+    
+    .chat-message.user {
+        background-color: var(--primary);
+        color: white;
+        margin-left: auto;
+    }
+    
+    .chat-message.bot {
+        background-color: #e6eeff;
+        color: var(--text);
+    }
+    
+    .chat-input {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .chat-input .form-control {
+        flex: 1;
+    }
+</style>
